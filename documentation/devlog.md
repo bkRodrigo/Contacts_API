@@ -6,7 +6,9 @@ the last entry will say `Day 3` :-)
 ## The Plan
 I'll use this area to document the different tasks I execute as I develop this
 application.
-
+ * [x] High level analysis of the project [Completed on Day 1](devlog#day-1)
+ * [x] Create API boilerplate [Completed on Day 1](devlog#day-1)
+ * [ ] Document running the local environment with `docker-compose`
 
 ## Day 1
 This day is about getting to grips with the problem and determining the best
@@ -111,9 +113,11 @@ anywhere, it just echos out a key for use where needed (`php artisan key:create`
 
 With that out of the way, I move on to getting the repo ready for docker.
 #### Getting the repo ready for docker
-
+I won't go into detail on preparing the repo for docker. I can say that it was
+successfully finished, we can review this in the dedicated documentation to get
+the [local environment running](./deploy/local.md)
 
 ### Tasks completed today
  * [x] Do an initial but complete project analysis
  * [x] Create the API boiler plate implementing a strategy for docker
-  containerization 
+  containerization

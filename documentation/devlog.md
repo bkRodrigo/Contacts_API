@@ -6,8 +6,8 @@ the last entry will say `Day 3` :-)
 ## The Plan
 I'll use this area to document the different tasks I execute as I develop this
 application.
- * [x] High level analysis of the project [Completed on Day 1](devlog#day-1)
- * [x] Create API boilerplate [Completed on Day 1](devlog#day-1)
+ * [x] High level analysis of the project [Completed on Day 1](devlog.md#day-1)
+ * [x] Create API boilerplate [Completed on Day 1](devlog.md#day-1)
  * [ ] Document running the local environment with `docker-compose`
 
 ## Day 1

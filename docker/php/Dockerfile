@@ -6,14 +6,14 @@ ARG uid
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    app-utils \
     git \
     curl \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    apt-utils
+    unzip
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

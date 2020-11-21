@@ -4,10 +4,10 @@ services:
   app:
     env_file:
       - ../.env
-    environment:
-      APP_USER: toor
-      APP_UID: 1000
     build:
+      args:
+        - user=$CONTAINER_APP_USER
+        - uid=$CONTAINER_APP_ID
       context: ./php
       dockerfile: Dockerfile
     image: contactsapi

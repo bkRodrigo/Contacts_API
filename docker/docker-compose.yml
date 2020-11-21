@@ -4,10 +4,13 @@ services:
   app:
     env_file:
       - ../.env
+    environment:
+      CONTAINER_APP_USER: $${CONTAINER_APP_USER}
+      CONTAINER_APP_ID: $${CONTAINER_APP_ID}
     build:
       args:
-        user: $${CONTAINER_APP_USER}
-        uid: $${CONTAINER_APP_ID}
+        user: ${CONTAINER_APP_USER}
+        uid: ${CONTAINER_APP_ID}
       context: ./php
       dockerfile: Dockerfile
     image: contactsapi

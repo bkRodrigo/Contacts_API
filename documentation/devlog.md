@@ -121,3 +121,14 @@ the [local environment running](./deploy/local.md)
  * [x] Do an initial but complete project analysis
  * [x] Create the API boiler plate implementing a strategy for docker
   containerization
+
+## Day 2
+My objectives for today
+ * [ ] Document local development process
+ * [ ] Create database structure
+ * [ ] Create required endpoints
+ * [ ] Create tests for the endpoints
+
+### Document local environment process
+I did this in a quick and dirty fashion, it can now be found [here](./deploy/local.md)
+(I basically updated the existing file with the new data).

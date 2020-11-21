@@ -6,8 +6,8 @@ services:
       - ../.env
     build:
       args:
-        user: toor
-        uid: 1000
+        user: $${CONTAINER_APP_USER}
+        uid: $${CONTAINER_APP_ID}
       context: ./php
       dockerfile: Dockerfile
     image: contactsapi

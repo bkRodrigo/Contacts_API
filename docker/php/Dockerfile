@@ -6,7 +6,7 @@ ARG uid
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    app-utils \
+    apt-utils \
     git \
     curl \
     libpng-dev \

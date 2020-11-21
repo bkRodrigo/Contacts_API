@@ -5,12 +5,9 @@ services:
     env_file:
       - ../.env
     environment:
-      APP_USER: $${CONTAINER_APP_USER}
-      APP_ID: $${CONTAINER_APP_ID}
+      APP_USER: toor
+      APP_UID: 1000
     build:
-      args:
-        user: $${APP_USER}
-        uid: $${APP_ID}
       context: ./php
       dockerfile: Dockerfile
     image: contactsapi
@@ -39,8 +36,6 @@ services:
       - contacts
 
   nginx:
-    env_file:
-      - ../.env
     image: nginx:1.19-alpine
     container_name: contactsapi-nginx
     restart: unless-stopped

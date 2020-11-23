@@ -4,9 +4,9 @@ services:
   app:
     build:
       args:
-        - user=$CONTAINER_APP_USER
-        - uid=$CONTAINER_APP_ID
-      context: docker/php
+        user: $CONTAINER_APP_USER
+        uid: $CONTAINER_APP_ID
+      context: ./
       dockerfile: docker/php/Dockerfile
     image: contactsapi
     container_name: contactsapi-app

@@ -27,11 +27,11 @@ everything up and running.
      `DB_PASSWORD`.
     1. In order for the app to function correctly, we'll also need to specify
      the `APP_KEY`; this'll be done further down :)
- 1. From your project root, change directory to `./docker`
  1. Start the project locally
+    1. Make sure you're on the project's root directory.
     1. Build the app first with: `docker-compose build app`
     1. Run the containers in daemon mode: `docker-compose up -d`
-    1. Confirm the containers are running with: `docker-compose ps`
+    1. Confirm the containers are running with: `ddocker-compose ps`
     1. Confirm you successfully have your project copied over to the app
      container with: `docker-compose exec app ls -la`
     1. Build the app with: `docker-compose exec app composer install`
@@ -39,6 +39,12 @@ everything up and running.
      The `key:create` command generates a key for the app. Go ahead and assign
      the value to the `APP_KEY` value that's stored in the `.env` file you
      created earlier.
- 1. You should now see the api runing in http://localhost:8080 
+ 1. You should now see the api running in http://localhost:8080
+ 1. *(Extra)*: Some useful extra commands to work in the local environment
+    1. In order to stop the service and keep the current state of the service,
+     you can do a `docker-compose pause`; you can then get the service back online
+     with a `docker-compose unpause`.
+    1. In order to fully stop the service, you can do a `docker-compose down`; you
+     can get the service back online with a `docker-compose up -d`.  
 
  

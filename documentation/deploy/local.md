@@ -20,18 +20,18 @@ everything up and running.
        1. In order to get your user and id, just open the console app and type
         `id`. The `id` command will give you your user information; it'll like
         something like this: `uid=1000(toor) gid=1000(toor)...`
-       1. In the example above, the user is "toor" and the id is "1000"
+       1. In the example above, the user is `toor` and the id is `1000`
     1. Go ahead and configure the `CONTAINER_APP_USER` and the `CONTAINER_APP_ID`
      to the values you respectively obtained in the prior step.
     1. Go ahead and configure the desired values for `DB_DATABASE`, `DB_USERNAME`,
      `DB_PASSWORD`.
     1. In order for the app to function correctly, we'll also need to specify
-     the `APP_KEY`; this'll be done further down :)
+     the `APP_KEY`; this will be done further down :)
  1. Start the project locally
     1. Make sure you're on the project's root directory.
     1. Build the app first with: `docker-compose build app`
     1. Run the containers in daemon mode: `docker-compose up -d`
-    1. Confirm the containers are running with: `ddocker-compose ps`
+    1. Confirm the containers are running with: `docker-compose ps`
     1. Confirm you successfully have your project copied over to the app
      container with: `docker-compose exec app ls -la`
     1. Build the app with: `docker-compose exec app composer install`
@@ -44,7 +44,9 @@ everything up and running.
     1. In order to stop the service and keep the current state of the service,
      you can do a `docker-compose pause`; you can then get the service back online
      with a `docker-compose unpause`.
-    1. In order to fully stop the service, you can do a `docker-compose down`; you
-     can get the service back online with a `docker-compose up -d`.  
+    1. In order to fully stop the service and remove all associated container data,
+     you can do a `docker-compose down`; you can get the service back online with a
+     `docker-compose up -d`.
+    1. You can look at container logs doing: `docker-compose logs`.
 
  

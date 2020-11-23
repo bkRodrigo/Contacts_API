@@ -2,26 +2,22 @@ version: '3.8'
 
 services:
   app:
-    env_file:
-      - ../.env
     build:
       args:
         - user=$CONTAINER_APP_USER
         - uid=$CONTAINER_APP_ID
-      context: ./php
-      dockerfile: Dockerfile
+      context: docker/php
+      dockerfile: docker/php/Dockerfile
     image: contactsapi
     container_name: contactsapi-app
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
-      - ../:/var/www
+      - ./:/var/www
     networks:
       - contacts
 
   db:
-    env_file:
-      - ../.env
     image: mysql:5.7
     container_name: contactsapi-db
     restart: unless-stopped
@@ -42,8 +38,8 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ../:/var/www
-      - ./nginx:/etc/nginx/conf.d
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
     networks:
       - contacts
 

@@ -23,6 +23,7 @@ everything up and running.
        1. In the example above, the user is `toor` and the id is `1000`
     1. Go ahead and configure the `CONTAINER_APP_USER` and the `CONTAINER_APP_ID`
      to the values you respectively obtained in the prior step.
+    1. Go ahead and set `DB_HOST` to the value of `db`.
     1. Go ahead and configure the desired values for `DB_DATABASE`, `DB_USERNAME`,
      `DB_PASSWORD`.
     1. In order for the app to function correctly, we'll also need to specify
@@ -39,6 +40,8 @@ everything up and running.
      The `key:create` command generates a key for the app. Go ahead and assign
      the value to the `APP_KEY` value that's stored in the `.env` file you
      created earlier.
+    1. Go ahead and execute all migrations in order to get the database setup with:
+     `docker-compose exec app php artisan migrate`
  1. You should now see the api running in http://localhost:8080
  1. *(Extra)*: Some useful extra commands to work in the local environment
     1. In order to stop the service and keep the current state of the service,

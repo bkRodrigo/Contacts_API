@@ -8,7 +8,9 @@ I'll use this area to document the different tasks I execute as I develop this
 application.
  * [x] High level analysis of the project [Completed on Day 1](devlog.md#day-1)
  * [x] Create API boilerplate [Completed on Day 1](devlog.md#day-1)
- * [ ] Document running the local environment with `docker-compose`
+ * [x] Document local develement process (Back end)  [Completed on Day 2](devlog.md#day-2)
+ * [x] (sneaky extra task for the day) Create front end boilerplate [Completed on Day 2](devlog.md#day-2)
+ * [x] Analyze database structure [Completed on Day 2](devlog.md#day-2)
 
 ## Day 1
 This day is about getting to grips with the problem and determining the best
@@ -124,11 +126,150 @@ the [local environment running](./deploy/local.md)
 
 ## Day 2
 My objectives for today
- * [ ] Document local development process
- * [ ] Create database structure
- * [ ] Create required endpoints
- * [ ] Create tests for the endpoints
+ - [ ] Document local development process (Back end)
+ - [ ] Analyze database structure
+ - [ ] Create required endpoints
+ - [ ] Create tests for the endpoints
 
 ### Document local environment process
 I did this in a quick and dirty fashion, it can now be found [here](./deploy/local.md)
 (I basically updated the existing file with the new data).
+
+### Create database structure (first try)
+The first thing I thought about here is what data am I capturing and how can I
+validate it?
+A contact should have;
+ * A Name: This is easy to validate, it's just two strings, a first name and a
+  last name.
+ * A Company: This is also easy to validate, it's just a string (I won't try to
+  correct input for a company with a similar name as this brings with it too
+  much complexity).
+ * Profile Image: This is a file... I need to validate it's an image. I'd like to
+  also store images that are at least 400px x 400px. I've randomly chosen this
+  resolution, but square images are convenient.
+ * An email: This is just a regex check of type email.
+ * A birth date: This is just a date, nothing complicated here.
+ * A phone number: This can be complicated if I want it to be. I'll choose to make
+  it simple, it should have at least 6 numbers.
+   * With a phone number type
+ * An address: This is complicated. I really don't want to make a complex database
+  here... I also don't want to validate country names / city names (never mind
+  street names!). I think I'll delegate the responsibility to procure a street
+  address to the front end in this case. Since my front end is consuming a gateway,
+  I can plug a service to that gateway (for example, Google Maps API). Taking a
+  look at [schema.org addresses](https://schema.org/address) and
+  [schema.org Geo Coordinates](https://schema.org/GeoCoordinates), I came up with
+  the following address properties
+   * Street Address (`string`)
+   * Postal code (`string`)
+   * City (`string`)
+   * State or Province (`string`)
+   * Country (`string`)
+   * latitude (`number`)
+   * longitude (`number`)
+  
+I'm going to place my backend effort on pause for now as I want to delve into what
+I can do with the Google maps API. It's not always a great practice to integrate
+to one specific provider for data, I'm going to try to avoid that, but I definitely
+want my implementation to be compatible with what I obtain from the maps api.
+
+### Integrate Google maps services for address validation
+So, if I'm going to delegate the Google services to the front end, I'll just build
+the front end boilerplate now.
+
+After a couple of hours, I've created a boilerplate that builds a structure where
+we have a gateway and front end build. It took me longer than I wanted, but we at
+least have that extra effort done. I won't go into detail with regards to the FE
+code as that's a bit out of the scope of this code challenge; generally speaking,
+the gateway is using `Express`, and the FE project is using `vue` with
+`tailwindcss` for styling (linting with ESLint). I would've normally used something
+like `AlpineJS` for this project, but the interviewer recommened I use `vue` in
+this case :). We're not going to use any test framework for this as the main
+challenge is in the backend. Maybe on Day 3, I'll dockerize the front end also in
+order to make it easy to deploy.
+ 
+With the boilerplate done, I can try to integrate google services to this. I'm
+going to use the Google Places API by following instructions from [this page](https://developers.google.com/maps/documentation/javascript/places-autocomplete).
+I reviewed the API and implementing it with `vue` was easy. I haven't completely
+finished the front end code at this point as we wanted to verify that the Places
+API can give us all the data we need in order to add addresses to our database.
+With my demo code complete, I successfully managed to procure all of the data we
+need, YAY!
+
+### Create database structure (second try)
+With the above, I've whipped up a schema;
+
+| companies |        |
+|-----------|--------|
+| id        | pk     |
+| name      | string |
+
+| contacts   |              |
+|------------|--------------|
+| id         | pk           |
+| first_name | text         |
+| last_name  | text         |
+| company_id | fk_companies |
+| avatar     | longtext     |
+| email      | text         |
+| birthday   | date         |
+| address_id | fk_addresses |
+
+| contact_phone |                  |
+|---------------|------------------|
+| contact_id    | fk_contacts (pk) |
+| phone_id      | fk_phones (pk)   |
+
+| phones      |      |
+|-------------|------|
+| id          | pk   |
+| number      | text |
+| description | text |
+
+| locations |      |
+|-----------|------|
+| id        | pk   |
+| name      | text |
+*Used to tag for "home" or "work"*
+
+| addresses      |                 |
+|----------------|-----------------|
+| id             | pk              |
+| postal_code_id | fk_postal_codes |
+| street_address | text            |
+| description    | text            |
+| city_id        | fk_cities       |
+| state_id       | fk_states       |
+| country_id     | fk_countries    |
+| latitude       | number          |
+| longitude      | number          |
+
+| postal_codes |      |
+|--------------|------|
+| id           | pk   |
+| code         | text |
+
+| cities |      |
+|--------|------|
+| id     | pk   |
+| name   | text |
+
+| states |      |
+|--------|------|
+| id     | pk   |
+| name   | text |
+
+| countries |      |
+|-----------|------|
+| id        | pk   |
+| name      | text |
+
+I've gone ahead and created the migrations for these... that's going to be it for
+today.
+
+### Tasks completed today
+ - [x] Document local develement process (Back end)
+ - [x] (sneaky extra task for the day) Create front end boilerplate
+ - [x] Analyze database structure
+ - [ ] Create required endpoints
+ - [ ] Create tests for the endpoints

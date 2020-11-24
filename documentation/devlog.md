@@ -10,7 +10,7 @@ application.
  * [x] Create API boilerplate [Completed on Day 1](devlog.md#day-1)
  * [x] Document local develement process (Back end)  [Completed on Day 2](devlog.md#day-2)
  * [x] (sneaky extra task for the day) Create front end boilerplate [Completed on Day 2](devlog.md#day-2)
- * [x] Analyze database structure [Completed on Day 2](devlog.md#day-2)
+ * [x] Analyze database structure and migrations [Completed on Day 2](devlog.md#day-2)
 
 ## Day 1
 This day is about getting to grips with the problem and determining the best
@@ -270,6 +270,21 @@ today.
 ### Tasks completed today
  - [x] Document local develement process (Back end)
  - [x] (sneaky extra task for the day) Create front end boilerplate
- - [x] Analyze database structure
+ - [x] Analyze database structure and migrations
  - [ ] Create required endpoints
  - [ ] Create tests for the endpoints
+
+## Day 3
+Today we're going to try to complete the tasks that were left over from yesterday
+and also try to finish the API completely. With the API complete, we may very well
+be with time to finish the front end also... I'm not sure we're going to be able
+to tidy up the front end too much as it's a lot to do in one day, but I'd really
+like to finish this code challenge on day 3. If there's a day 4 it'll be for testing
+
+My objectives for today
+ - [ ] Create data models
+ - [ ] Create required endpoints
+ - [ ] Create tests for the endpoints
+
+### Data Models
+Let's create all the required models for our database.

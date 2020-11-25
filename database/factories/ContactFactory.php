@@ -23,10 +23,17 @@ class ContactFactory extends Factory
      */
     public function definition()
     {
+        $imageNames = [
+            '87a83a4a-ff97-4fd7-b5cb-3835fb82e2f7.jpg',
+            '3a60792c-1006-4b67-8c38-053602ddfb49.jpg',
+            'dec88854-a8a3-41de-a072-56c9b27f2b5e.jpg',
+        ];
+        $imageName = $imageNames[rand(0, 2)];
+
         return [
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
-            'avatar' => $this->faker->image('public/images', 400, 400, null, false),
+            'avatar' => $imageName,
             'email' => $this->faker->email,
             'birthday' => $this->faker->date(),
             'company_id' => function () {

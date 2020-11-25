@@ -18,7 +18,6 @@ class ContactsSeeder extends Seeder
      */
     public function run()
     {
-        /*
         $count = rand(400, 800);
         echo 'Creating ' . $count . ' companies.' . PHP_EOL;
         $companies = Company::factory()->count($count)->make();
@@ -45,23 +44,33 @@ class ContactsSeeder extends Seeder
 
             $newPhone->save();
         }
-        */
-        $count = 1;
-        echo 'Creating ' . $count . ' contacts.' . PHP_EOL;
-        echo Str::uuid() . PHP_EOL;
-        return;
-        $contacts = Contact::factory()->count($count)->make();
-        foreach ($contacts as $contact) {
-            $newContact = new Contact();
-            $newContact->first_name = $contact->first_name;
-            $newContact->last_name = $contact->last_name;
-            $newContact->avatar = $contact->avatar;
-            $newContact->email = $contact->email;
-            $newContact->birthday = $contact->birthday;
-            $newContact->company()->associate($contact->company);
-            $newContact->address()->associate($contact->address);
+        $i = 0;
+        $totalPasses = 60;
+        echo 'Creating Contacts' . PHP_EOL;
+        $totalContacts = 0;
+        while ($i < $totalPasses) {
+            $i++;
+            $count = rand(1, 25);
+            echo '  Pass ' . $i . ' of ' . $totalPasses . PHP_EOL;
+            $company = Company::all()->random();
+            echo '  - Creating ' . $count . ' contacts for company ' . $company->name . PHP_EOL;
+            $totalContacts += $count;
+            $contacts = Contact::factory()->count($count)->make();
+            foreach ($contacts as $contact) {
+                $newContact = new Contact();
+                $newContact->first_name = $contact->first_name;
+                $newContact->last_name = $contact->last_name;
+                $newContact->avatar = $contact->avatar;
+                $newContact->email = $contact->email;
+                $newContact->birthday = $contact->birthday;
+                $newContact->company()->associate($company);
+                $newContact->address()->associate($contact->address);
 
-            $newContact->save();
+                $newContact->save();
+            }
         }
+        $doneMsg = 'Contact seeding completed, a total of ' . $totalContacts;
+        $doneMsg .= ' contacts were created' . PHP_EOL;
+        echo $doneMsg;
     }
 }

@@ -220,11 +220,12 @@ With the above, I've whipped up a schema;
 | contact_id    | fk_contacts (pk) |
 | phone_id      | fk_phones (pk)   |
 
-| phones      |      |
-|-------------|------|
-| id          | pk   |
-| number      | text |
-| description | text |
+| phones      |              |
+|-------------|--------------|
+| id          | pk           |
+| number      | text         |
+| description | text         |
+| location_id | fk_locations |
 
 | locations |      |
 |-----------|------|
@@ -265,7 +266,13 @@ With the above, I've whipped up a schema;
 | name      | text |
 
 I've gone ahead and created the migrations for these... that's going to be it for
-today.
+today. I'm going to be honest here... the database discussed above is not very well
+normalized at all; there should be a lot of relationships that aren't there
+ * Relationship between `postal_codes`, `cities`, `states` and `countries`.
+ * A company should also have an address; there's lots of additional data associated
+  with a company that is not contemplated in this database.
+ * I'm basically choosing to ignore this with the intent of saving time; suffice
+  it to say that in a real application, this would not be my database schema.
 
 ### Tasks completed today
  - [x] Document local develement process (Back end)

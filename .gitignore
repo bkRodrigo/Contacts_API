@@ -3,4 +3,8 @@
 Homestead.json
 Homestead.yaml
 .env
+.phpstorm.meta.php
 .phpunit.result.cache
+/storage
+/storage/*.key
+*.map

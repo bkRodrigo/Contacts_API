@@ -17,7 +17,23 @@ class Phone extends Model
     protected $fillable = [
         'number',
         'description',
+        'location_id',
     ];
 
+    /**
+     * The contacts that belong to the phone.
+     */
+    public function contacts()
+    {
+        return $this->belongsToMany(Contact::class);
+    }
+
+    /**
+     * Get the postalCode that owns the address.
+     */
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
 
 }

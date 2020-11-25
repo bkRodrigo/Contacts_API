@@ -13,7 +13,7 @@ class CreatePostalCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('postal-codes', function (Blueprint $table) {
+        Schema::create('postalcodes', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreatePostalCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postal-codes');
+        Schema::dropIfExists('postalcodes');
     }
 }

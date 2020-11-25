@@ -19,7 +19,7 @@ class CreateAddressesTable extends Migration
             $table->string('description')->nullable();
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            $table->foreignId('postal-code_id')->constrained('postal-codes');
+            $table->foreignId('postalcode_id')->constrained('postalcodes');
             $table->foreignId('city_id')->constrained('cities');
             $table->foreignId('state_id')->constrained();
             $table->foreignId('country_id')->constrained('countries');

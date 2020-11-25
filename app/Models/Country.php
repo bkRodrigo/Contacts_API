@@ -25,5 +25,12 @@ class Country extends Model
         'name',
     ];
 
+    /**
+     * Get the addresses assigned to this country.
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'country_id');
+    }
 
 }

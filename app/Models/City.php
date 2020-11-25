@@ -25,5 +25,12 @@ class City extends Model
         'name',
     ];
 
+    /**
+     * Get the addresses assigned to this city.
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'city_id');
+    }
 
 }

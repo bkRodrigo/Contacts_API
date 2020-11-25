@@ -18,5 +18,12 @@ class Location extends Model
         'name',
     ];
 
+    /**
+     * Get the phones associated with this location.
+     */
+    public function phones()
+    {
+        return $this->hasMany(Phone::class);
+    }
 
 }

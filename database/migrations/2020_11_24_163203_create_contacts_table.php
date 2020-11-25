@@ -17,7 +17,7 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->binary('avatar')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('email')->nullable();
             $table->date('birthday')->nullable();
             $table->foreignId('company_id')->constrained('companies');

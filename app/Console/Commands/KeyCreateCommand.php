@@ -29,12 +29,11 @@ class KeyCreateCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
         $this->info('Generated a 32 character long key');
         $this->line(md5(uniqid()));
-
     }
 }

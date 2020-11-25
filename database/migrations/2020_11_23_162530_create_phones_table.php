@@ -17,6 +17,7 @@ class CreatePhonesTable extends Migration
             $table->id();
             $table->string('number')->unique();
             $table->string('description')->nullable();
+            $table->foreignId('location_id')->constrained();
             $table->timestamps();
         });
     }

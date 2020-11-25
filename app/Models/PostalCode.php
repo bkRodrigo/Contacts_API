@@ -14,7 +14,7 @@ class PostalCode extends Model
      *
      * @var string
      */
-    protected $table = 'postal-codes';
+    protected $table = 'postalcodes';
 
     /**
      * The attributes that are mass assignable.
@@ -25,5 +25,12 @@ class PostalCode extends Model
         'code',
     ];
 
+    /**
+     * Get the addresses assigned to this postal code.
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'postalcode_id');
+    }
 
 }

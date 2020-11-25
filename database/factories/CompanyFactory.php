@@ -22,7 +22,25 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->company,
+            'name' => $this->generateCompanyName(),
         ];
+    }
+
+    /**
+     * Generate a unique company name.
+     *
+     * @param int $attempts number of attempts to generate a result
+     *
+     * @return string
+     */
+    private function generateCompanyName(int $attempts = 0)
+    {
+        $companyName = $this->faker->unique($attempts === 0)->company;
+        $companyName .= $attempts > 10 ? '_(' . strval($attempts) . ')' : '';
+        if (is_null(Company::where('name', $companyName)->first())) {
+            return $companyName;
+        }
+
+        return $this->generateCompanyName($attempts + 1);
     }
 }

@@ -18,5 +18,12 @@ class State extends Model
         'name',
     ];
 
+    /**
+     * Get the addresses assigned to this state.
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'state_id');
+    }
 
 }

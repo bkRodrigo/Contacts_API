@@ -17,12 +17,12 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->string('street_address');
             $table->string('description')->nullable();
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
-            $table->foreignId('postalcode_id')->constrained('postalcodes');
-            $table->foreignId('city_id')->constrained('cities');
-            $table->foreignId('state_id')->constrained();
-            $table->foreignId('country_id')->constrained('countries');
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
+            $table->foreignId('postalcode_id')->nullable()->constrained('postalcodes');
+            $table->foreignId('city_id')->nullable()->constrained('cities');
+            $table->foreignId('state_id')->nullable()->constrained();
+            $table->foreignId('country_id')->nullable()->constrained('countries');
             $table->timestamps();
         });
     }

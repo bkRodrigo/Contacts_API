@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 
-class ContactsController extends Controller
+class ContactController extends Controller
 {
     /**
      * Create a new controller instance.

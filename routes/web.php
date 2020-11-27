@@ -18,16 +18,16 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/contact', [
-    'uses' => 'ContactsController@index',
+    'uses' => 'ContactController@index',
 ]);
 $router->get('/contact/{id}', [
-    'uses' => 'ContactsController@show',
+    'uses' => 'ContactController@show',
 ]);
 $router->post('/contact', [
-    'uses' => 'ContactsController@store',
+    'uses' => 'ContactController@store',
 ]);
 $router->post('/contact/{id}/image', [
-    'uses' => 'ContactsController@storeImage',
+    'uses' => 'ContactController@storeImage',
 ]);
 /*
 $router->post($uri, $callback);
@@ -44,4 +44,11 @@ $router->get('/address/{id}', [
 ]);
 $router->post('/address', [
     'uses' => 'AddressController@store',
+]);
+
+$router->get('/company', [
+    'uses' => 'CompanyController@index',
+]);
+$router->get('/company/{id}', [
+    'uses' => 'CompanyController@show',
 ]);

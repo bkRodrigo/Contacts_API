@@ -16,3 +16,32 @@
 $router->get('/', function () use ($router) {
     return env('APP_NAME', 'Contacts') . ': ' . $router->app->version();
 });
+
+$router->get('/contact', [
+    'uses' => 'ContactsController@index',
+]);
+$router->get('/contact/{id}', [
+    'uses' => 'ContactsController@show',
+]);
+$router->post('/contact', [
+    'uses' => 'ContactsController@store',
+]);
+$router->post('/contact/{id}/image', [
+    'uses' => 'ContactsController@storeImage',
+]);
+/*
+$router->post($uri, $callback);
+$router->put($uri, $callback);
+$router->patch($uri, $callback);
+$router->delete($uri, $callback);
+$router->options($uri, $callback);
+*/
+$router->get('/address', [
+    'uses' => 'AddressController@index',
+]);
+$router->get('/address/{id}', [
+    'uses' => 'AddressController@show',
+]);
+$router->post('/address', [
+    'uses' => 'AddressController@store',
+]);

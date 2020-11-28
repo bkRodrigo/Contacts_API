@@ -18,18 +18,18 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/contact', [
-    'uses' => 'ContactController@index',
+    'uses' => 'Contact\IndexContact',
 ]);
 $router->get('/contact/{id}', [
-    'uses' => 'ContactController@show',
-]);
-$router->post('/contact', [
-    'uses' => 'ContactController@store',
-]);
-$router->post('/contact/{id}/image', [
-    'uses' => 'ContactController@storeImage',
+    'uses' => 'Contact\ShowContact',
 ]);
 /*
+$router->post('/contact', [
+    'uses' => 'Contact\StoreContact,
+]);
+$router->post('/contact/{id}/avatar', [
+    'uses' => ''Contact\AssociateAvatarContact',
+]);
 $router->post($uri, $callback);
 $router->put($uri, $callback);
 $router->patch($uri, $callback);
@@ -37,18 +37,18 @@ $router->delete($uri, $callback);
 $router->options($uri, $callback);
 */
 $router->get('/address', [
-    'uses' => 'AddressController@index',
+    'uses' => 'Address\IndexAddress',
 ]);
 $router->get('/address/{id}', [
-    'uses' => 'AddressController@show',
+    'uses' => 'Address\ShowAddress',
 ]);
 $router->post('/address', [
-    'uses' => 'AddressController@store',
+    'uses' => 'Address\StoreAddress',
 ]);
 
 $router->get('/company', [
-    'uses' => 'CompanyController@index',
+    'uses' => 'Company\IndexCompany',
 ]);
 $router->get('/company/{id}', [
-    'uses' => 'CompanyController@show',
+    'uses' => 'Company\ShowCompany',
 ]);

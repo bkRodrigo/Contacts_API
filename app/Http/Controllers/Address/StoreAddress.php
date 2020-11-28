@@ -1,132 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Address;
 
+use App\Http\Controllers\ResourceAbstractClass;
 use App\Models\Address;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\PostalCode;
-use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
-class AddressController extends Controller
+class StoreAddress extends ResourceAbstractClass
 {
     /**
-     * The addresses model.
-     *
-     * @var Address
-     */
-    protected $address;
-
-    /**
-     * The postal codes model.
-     *
-     * @var PostalCode
-     */
-    protected $postalCode;
-
-    /**
-     * The cities model.
-     *
-     * @var City
-     */
-    protected $city;
-
-    /**
-     * The states model.
-     *
-     * @var State
-     */
-    protected $state;
-
-    /**
-     * The countries model.
-     *
-     * @var Country
-     */
-    protected $country;
-
-    /**
-     * Create a new controller instance.
+     * Create a new single action controller instance.
      *
      * @param Address $address
-     * @param PostalCode $postalCode
-     * @param City $city
-     * @param State $state
-     * @param Country $country
      */
-    public function __construct(
-        Address $address,
-        PostalCode $postalCode,
-        City $city,
-        State $state,
-        Country $country
-    ) {
-        $this->address = $address;
-        $this->postalCode = $postalCode;
-        $this->city = $city;
-        $this->state = $state;
-        $this->country = $country;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return JsonResponse
-     */
-    public function index()
-    {
-        // Resolve pagination data
-        $addressCount = $this->address->all()->count();
-        $perPage = 15;
-        $lastPage = 1 + ($addressCount - ($addressCount % $perPage)) / $perPage;
-        // Analyze Parameters
-        $page = intval(request()->input('page', 1));
-        $page = $page < 1 ? 1 : $page;
-        $page = $page > $lastPage ? $lastPage : $page;
-        $eagerLoad = $this->resolveEagerLoadQuery(request()->input('include', ''));
-        // Fetch the data
-        $addresses = $this->address->with($eagerLoad)->get()->forPage($page, $perPage);
-
-        return response()->json([
-            'data' => $addresses->toArray(),
-            'meta' => [
-                'current_page' => $page,
-                'from' => 1 + $perPage * ($page - 1),
-                'last_page' => $lastPage,
-                'per_page' => $perPage,
-                'to' => $page * $perPage,
-                'total' => $addressCount,
-            ],
-        ]);
+    public function __construct(Address $address) {
+        $this->model = $address;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return JsonResponse
-     */
-    public function show(int $id)
-    {
-        // Analyze eager loading params
-        $eagerLoad = $this->resolveEagerLoadQuery(request()->input('include', ''));
-
-        return response()->json(
-            $this->address->with($eagerLoad)->where('id', $id)->first()
-        );
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
      * @param Request $request
      *
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function __invoke(Request $request) : JsonResponse
     {
         // Validate request
         $validator = Validator::make($request->all(), [
@@ -176,37 +76,6 @@ class AddressController extends Controller
             'address' => $newAddress,
             'message' => 'The address was successfully created',
         ]);
-    }
-
-    /**
-     * Based on the value of includesString, it will return an array that informs
-     * eloquent what values we want to eager load.
-     *
-     * @param  string  $includeString
-     * @return array
-     */
-    private function resolveEagerLoadQuery(string $includeString)
-    {
-        $eagerLoad = [];
-        $includesItems = array_unique(explode(',', $includeString));
-        foreach ($includesItems as $includesItem) {
-            switch (strtolower($includesItem)) {
-                case 'postalcode':
-                    $eagerLoad[] = 'postalCode';
-                    break;
-                case 'city':
-                    $eagerLoad[] = 'city';
-                    break;
-                case 'state':
-                    $eagerLoad[] = 'state';
-                    break;
-                case 'country':
-                    $eagerLoad[] = 'country';
-                    break;
-            }
-        }
-
-        return $eagerLoad;
     }
 
     /**

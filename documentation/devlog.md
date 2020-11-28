@@ -11,6 +11,10 @@ application.
  * [x] Document local develement process (Back end)  [Completed on Day 2](devlog.md#day-2)
  * [x] (sneaky extra task for the day) Create front end boilerplate [Completed on Day 2](devlog.md#day-2)
  * [x] Analyze database structure and migrations [Completed on Day 2](devlog.md#day-2)
+ * [x] Create data models [Completed on Day 3](devlog.md#day-3)
+ * [x] Create required endpoints [Completed on Day 3](devlog.md#day-3)
+ * [x] Create tests for the endpoints [Completed on Day 3](devlog.md#day-3)
+ * [x] Create front end client UI (done-ish) [Completed on Day 3](devlog.md#day-3)
 
 ## Day 1
 This day is about getting to grips with the problem and determining the best
@@ -292,6 +296,122 @@ My objectives for today
  - [ ] Create data models
  - [ ] Create required endpoints
  - [ ] Create tests for the endpoints
+ - [ ] Create front end client UI (done-ish)
 
 ### Data Models
-Let's create all the required models for our database.
+Let's create all the required models for our database. This part was done without
+much of a hitch, this is a focused microservice, it also isn't very complex, I
+didn't do any complicated stuff like repository models; I went with normal models.
+
+I then created all the factories that are associated for these models. This task
+took me longer than expected because I wanted to use the factories to seed my
+database; the php faker library has no way of creating unique pieces of content on
+multiple sessions and this created problems when trying to run my database seeder
+and finding database constraint errors all over the place. In order to solve this,
+I went ahead and created dedicated functions for my constrained fields... getting
+to this solution took me a little bit longer than expected as there were edge
+cases (such as the faker library itself running out of fake names and going back
+to repeated names).
+
+### The endpoints
+In order to create my endpoints, I had to think about whether or not I should use
+closures for my endpoints. Even though this is a simple microservice, I really
+didn't see this to be so incredibly simple, that I can write clean closures for
+my endpoints; I decided to use controllers and references to my controllers from
+the route. I also chose to use single action controllers as they offer me a great
+deal of opportunity to have simple legible classes that aren't polluted by
+unrelated actions that implement other dependencies. After some testing and
+finding that there's actually a lot of shared logic between my controllers, I
+created an abstract class that implements my reuseable code (eager loading logic,
+pagination and even my index action). I finally went ahead and created a Postman
+project with all my endpoints.
+Endpoints;
+* `/`: My base route that only returns the name of the application and the app
+ version. Available methods below;
+  * Get
+* `/contact`: My contact resource that implements all required actions for this
+ api. Available methods below;
+  * Get, `GET /contact`
+  * Show, `GET /contact/{id}`
+  * Store, `POST /contact`
+  * Update, `PATCH /contact/{id}`
+  * Delete `DELETE /contact/{id}`
+* `/address`: I found that it was best to make a dedicated resource for addresses
+ as it gave me the opportunity to isolate this particular problem. Addresses
+ have a great deal of data associated to them (The address itself, latitude,
+ longitude, postalcode, city, state/province, country). Many of an address's
+ associated data lives in multiple tables. So the decision here was to create
+ addresses through a dedicated resource that then gets associated to my the
+ contact in question. Available methods below;
+  * Get, `GET /address`
+  * Show, `GET /address/{id}`
+  * Store, `POST /address`
+  * Update, `PATCH /address/{id}`
+  * Delete `DELETE /address/{id}`
+* `/company`: Even though creating a dedicated resource for companies is outside
+ the scope of this challenge, I chose to create one. The reasoning here is that,
+ like addresses, companies have an incredible amount of data associated to them.
+ I will not implement all of the logic and data that can be associated to a company,
+ but I find it great to start having a dedicated resource for it. In order to not
+ increase complexity, this resource is read only. Available methods below;
+  * Get, `GET /company`
+  * Show, `GET /company/{id}`
+* `/phone`: Given that I need to search for contacts based on phone numbers, I
+ chose to create a read only resource for phones (just like company). Available
+ methods below;
+  * Get, `GET /phone`
+  * Show, `GET /phone/{id}`
+  
+### Digging deeper with my endpoints
+I chose to go a little bit further with the endpoints. Since they also all have
+relationships, I wanted to be able to eagerload them. So I added some query strings
+to the getters.
+ * `include`: You can add an `include` query that allows you to specify what you'd
+  like to eager load. For example, a contact can have the associated `Company` and
+  `Address` eager loaded.
+  
+I also wanted to be able to search my resources. So I added some query strings to
+the getters as well.
+ * `search`: You can search for specific resource items by doing
+  `search=search string`. All searches are using a "contains" strategy, so you
+  don't need to search for exact matches.
+ * The `Contact` resource is a special case as you can search based on specific
+  related fields. `Contact`s can be searched based on their first name, last name
+  and email. here's a few examples of how this query string works;
+   * `search=spen`: Searches for "spen" in ['first_name', 'last_name', 'email']
+   * `search=spen[email]`: Searches for "spen" in ['email']
+   * `search=spen[first_name,last_name]`: Searches for "spen" in ['first_name', 'last_name']
+   * `search=spen[]`: Searches for "spen" in ['first_name', 'last_name', 'email']
+   * `search=spen[emails,first_name]`: Searches for "spen" in ['first_name']
+   * `search=spen[emails]`: Searches for "spen" in ['first_name', 'last_name', 'email']
+
+## The tests
+While iterating through the endpoints, it's natural to create tests.
+
+
+## The frontend
+After completing all of the above, I was left with very little time to complete
+the front end effort. I never intended to create a full front end project as my
+front end will not implement authentication or any type of tokens for requests
+to the gateway (in a real project all of these security features would be required).
+This code challenge is focused on the backend, so I whipped up my client quickly,
+the general boilerplate was completed on Day 2 so this was just a matter of getting
+the real functionality working. Unfortunately I'm a pefectionist and I'm not happy
+with how my front end looks; it lacks a bit of heart and love.
+
+### Tasks completed today
+The goal on day 3 was to finish the challenge. Even though I did finish the
+requirement, I'm going to add one more day to this challenge in order to get that
+UI looking a bit better and also to get the documentation more complete.
+ - [x] Create data models
+ - [x] Create required endpoints
+ - [x] Create tests for the endpoints
+ - [x] Create front end client UI (done-ish)
+
+## Day 4
+There's three main objectives today. Today is the final day of development on this
+project, we won't have a day 5, so everything needs to be completed today
+ - [ ] Refine the front end so that it's more beautiful
+ - [ ] Update documentation all over the project
+ - [ ] Deploy the project so the folks at Kin + Carta can play with a demo version
+       of the project

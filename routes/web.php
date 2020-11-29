@@ -45,6 +45,9 @@ $router->get('/address/{id}', [
 $router->post('/address', [
     'uses' => 'Address\StoreAddress',
 ]);
+$router->delete('/address/{id}', [
+    'uses' => 'Address\DeleteAddress',
+]);
 
 $router->get('/company', [
     'uses' => 'Company\IndexCompany',

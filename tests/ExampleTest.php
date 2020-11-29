@@ -21,15 +21,6 @@ class ExampleTest extends TestCase
         )->seeJson([
             'message' => 'The address was successfully created',
         ]);
-    }
-
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function secondTestExample()
-    {
         \App\Models\Address::count();
         $this->assertEquals(1, \App\Models\Address::count());
     }

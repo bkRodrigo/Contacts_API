@@ -346,7 +346,6 @@ Endpoints;
   * Get, `GET /address`
   * Show, `GET /address/{id}`
   * Store, `POST /address`
-  * Update, `PATCH /address/{id}`
   * Delete `DELETE /address/{id}`
 * `/company`: Even though creating a dedicated resource for companies is outside
  the scope of this challenge, I chose to create one. The reasoning here is that,

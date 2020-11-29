@@ -42,7 +42,14 @@ everything up and running.
      created earlier.
     1. Go ahead and execute all migrations in order to get the database setup with:
      `docker-compose exec app php artisan migrate`
+    1. *(optional)* If you want to seed the database, you can do that with:
+     `docker-compose exec app php artisan db:seed`
  1. You should now see the api running in http://localhost:8080
+ 1. *(Optional)*: Running tests
+    1. This project's tests have a database dependency. The tests depend on a
+     sqlite database being set up. In order to set that up, go ahead and run:
+     `docker-compose exec app php artisan db:boot-tests`
+    1. You can run tests by with: `docker-compose exec app vendor/bin/phpunit`
  1. *(Extra)*: Some useful extra commands to work in the local environment
     1. In order to stop the service and keep the current state of the service,
      you can do a `docker-compose pause`; you can then get the service back online

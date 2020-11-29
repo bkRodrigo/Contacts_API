@@ -47,7 +47,6 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
-
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -110,6 +109,14 @@ $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
+});
+
+$app->singleton('filesystem', function ($app) {
+    return $app->loadComponent(
+        'filesystems',
+        'Illuminate\Filesystem\FilesystemServiceProvider',
+        'filesystem'
+    );
 });
 
 return $app;

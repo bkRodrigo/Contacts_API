@@ -8,7 +8,7 @@ use App\Models\City;
 use App\Models\State;
 use App\Models\Country;
 
-class CompanyTest extends TestCase
+class AddressTest extends TestCase
 {
     use DatabaseMigrations;
 

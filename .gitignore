@@ -8,3 +8,4 @@ Homestead.yaml
 /storage
 /storage/*.key
 *.map
+/tests/database.sqlite

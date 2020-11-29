@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Address;
 
 use App\Http\Controllers\ResourceAbstractClass;
 use App\Models\Address;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\PostalCode;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -11,12 +15,54 @@ use Illuminate\Support\Facades\Validator;
 class StoreAddress extends ResourceAbstractClass
 {
     /**
+     * PostalCode model.
+     *
+     * @var PostalCode
+     */
+    protected $postalCode;
+
+    /**
+     * City model.
+     *
+     * @var City
+     */
+    protected $city;
+
+    /**
+     * State model.
+     *
+     * @var State
+     */
+    protected $state;
+
+    /**
+     * Country model.
+     *
+     * @var Country
+     */
+    protected $country;
+
+    /**
      * Create a new single action controller instance.
      *
      * @param Address $address
+     * @param PostalCode $postalCode
+     * @param City $city
+     * @param State $state
+     * @param Country $country
      */
-    public function __construct(Address $address) {
+    public function __construct(
+        Address $address,
+        PostalCode $postalCode,
+        City $city,
+        State $state,
+        Country $country
+    ) {
         $this->model = $address;
+        $this->postalCode = $postalCode;
+        $this->city = $city;
+        $this->state = $state;
+        $this->country = $country;
     }
 
     /**
@@ -43,7 +89,7 @@ class StoreAddress extends ResourceAbstractClass
             return response()->json($validator->errors(), 400);
         }
         // Create the new address
-        $newAddress = new $this->address();
+        $newAddress = new $this->model();
         $newAddress->street_address = $request->input('street_address');
         $newAddress->description = $request->input('description', '');
         $newAddress->latitude = $request->input('latitude', null);

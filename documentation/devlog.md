@@ -385,8 +385,13 @@ the getters as well.
    * `search=spen[emails]`: Searches for "spen" in ['first_name', 'last_name', 'email']
 
 ## The tests
-While iterating through the endpoints, it's natural to create tests.
-
+At the end of the day, I'm finding that I'm just taking up too much time with this
+code challenge. I created tests for the `\address` resource only. In a real world
+project, I'd think deeply about how testing should take place in a project and
+what structure should be followed for the testing directories and architecture.
+However, if I dedicate all the time I want to dedicate to testing, I won't finish
+this by day 4... so tests will have to stay at just doing light testing of the
+`\address` endpoint.
 
 ## The frontend
 After completing all of the above, I was left with very little time to complete

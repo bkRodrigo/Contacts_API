@@ -5,6 +5,8 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /**
      * A basic test example.
      *
@@ -12,10 +14,23 @@ class ExampleTest extends TestCase
      */
     public function testExample()
     {
-        $this->get('/');
+        $this->json(
+            'POST',
+            '/address',
+            ['street_address' => '63 Whipple Ave.']
+        )->seeJson([
+            'message' => 'The address was successfully created',
+        ]);
+    }
 
-        $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
-        );
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function secondTestExample()
+    {
+        \App\Models\Address::count();
+        $this->assertEquals(1, \App\Models\Address::count());
     }
 }

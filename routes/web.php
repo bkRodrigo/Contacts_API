@@ -23,19 +23,16 @@ $router->get('/contact', [
 $router->get('/contact/{id}', [
     'uses' => 'Contact\ShowContact',
 ]);
-/*
 $router->post('/contact', [
-    'uses' => 'Contact\StoreContact,
+    'uses' => 'Contact\StoreContact',
 ]);
-$router->post('/contact/{id}/avatar', [
-    'uses' => ''Contact\AssociateAvatarContact',
+$router->put('/contact/{id}', [
+    'uses' => 'Contact\UpdateContact',
 ]);
-$router->post($uri, $callback);
-$router->put($uri, $callback);
-$router->patch($uri, $callback);
-$router->delete($uri, $callback);
-$router->options($uri, $callback);
-*/
+$router->delete('/contact/{id}', [
+    'uses' => 'Contact\DeleteContact',
+]);
+
 $router->get('/address', [
     'uses' => 'Address\IndexAddress',
 ]);
@@ -54,4 +51,15 @@ $router->get('/company', [
 ]);
 $router->get('/company/{id}', [
     'uses' => 'Company\ShowCompany',
+]);
+
+$router->get('/location', [
+    'uses' => 'Location\IndexLocation',
+]);
+$router->get('/location/{id}', [
+    'uses' => 'Location\ShowLocation',
+]);
+
+$router->post('/photo', [
+    'uses' => 'Photo\StorePhoto',
 ]);

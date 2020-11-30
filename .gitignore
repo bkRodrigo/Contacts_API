@@ -9,3 +9,4 @@ Homestead.yaml
 /storage/*.key
 *.map
 /tests/database.sqlite
+/public/images/*

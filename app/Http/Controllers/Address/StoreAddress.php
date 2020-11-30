@@ -66,7 +66,7 @@ class StoreAddress extends ResourceAbstractClass
     }
 
     /**
-     * Display the specified resource.
+     * Create a new resource based on the request data.
      *
      * @param Request $request
      *

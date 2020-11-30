@@ -17,11 +17,11 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('avatar')->nullable();
             $table->string('email')->nullable();
             $table->date('birthday')->nullable();
-            $table->foreignId('company_id')->constrained('companies');
-            $table->foreignId('address_id')->constrained('addresses');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->foreignId('address_id')->nullable()->constrained('addresses');
+            $table->foreignId('photo_id')->nullable()->constrained('addresses');
             $table->timestamps();
         });
     }

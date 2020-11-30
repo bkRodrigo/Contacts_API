@@ -334,7 +334,7 @@ Endpoints;
   * Get, `GET /contact`
   * Show, `GET /contact/{id}`
   * Store, `POST /contact`
-  * Update, `PATCH /contact/{id}`
+  * Update, `PUT /contact/{id}`
   * Delete `DELETE /contact/{id}`
 * `/address`: I found that it was best to make a dedicated resource for addresses
  as it gave me the opportunity to isolate this particular problem. Addresses
@@ -355,11 +355,17 @@ Endpoints;
  increase complexity, this resource is read only. Available methods below;
   * Get, `GET /company`
   * Show, `GET /company/{id}`
+* `/location`: This is just a convenience endpoint, very easy to create (no eager
+ loading in this one).
 * `/phone`: Given that I need to search for contacts based on phone numbers, I
  chose to create a read only resource for phones (just like company). Available
  methods below;
   * Get, `GET /phone`
   * Show, `GET /phone/{id}`
+* `/photo`: Used only to store photos. The photos themselves are just hosted on
+ a public directory that can be accessed by doing `/images/{media_id.ext}` (you
+ obtain the media data when looking at the photo attribute of a contact);
+  * Store, `POST /phone`
   
 ### Digging deeper with my endpoints
 I chose to go a little bit further with the endpoints. Since they also all have

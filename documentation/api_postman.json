@@ -1,0 +1,767 @@
+{
+    "info": {
+        "_postman_id": "ba355658-b8d8-4f9b-b850-6f84a4def2fa",
+        "name": "Kin+Carta",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "App: Version",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}",
+                    "host": [
+                        "{{host}}"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: All with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/contact/?page=0&include=company,address,phones,photo",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "company,address,phones,photo"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: All with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/contact/?page=0",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: Search by name with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/contact/?page=0&search=ro",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "search",
+                            "value": "ro"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: Search by name with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/contact/?page=0&include=company,address,phones,photo&search=ro[last_name]",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "company,address,phones,photo"
+                        },
+                        {
+                            "key": "search",
+                            "value": "ro[last_name]"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: Show with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/contact/2",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        "2"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: Show with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/contact/1?include=company,address,phones,photo",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        "1"
+                    ],
+                    "query": [
+                        {
+                            "key": "include",
+                            "value": "company,address,phones,photo"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: Store a Contact",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"first_name\": \"Rodrigo\",\n    \"last_name\": \"Cespedes Daza\",\n    \"email\": \"rodrigo@testmyfakeemail.com\",\n    \"birthday\": \"1986-11-22\",\n    \"company\": \"My Awesome Company\",\n    \"address_id\": \"1\",\n    \"phones\": [\n        {\n            \"number\": \"001 5555-5555\",\n            \"location\": \"home\",\n            \"description\": \"My description\"\n        }\n    ]\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{host}}/contact",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: Store a Contact Copy",
+            "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"first_name\": \"Korali\",\n    \"last_name\": \"Lopez Talaverano\",\n    \"email\": \"kora@brewkrafts.com\",\n    \"birthday\": \"1991-05-06\",\n    \"company\": \"My Awesome Company\",\n    \"address_id\": \"1\",\n    \"photo_id\": 5\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{host}}/contact/827",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        "827"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact: Delete by id",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/contact/827",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "contact",
+                        "827"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Photo: Show photo",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "photo",
+                            "type": "file",
+                            "src": "/Users/rodrigocespedes/Documents/Sephora/photos/test.png"
+                        }
+                    ],
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{host}}/images/VpHBn0EFqM4VWnK4PDsjQwJtP0O8wD5gDhYWdSF0.png",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "images",
+                        "VpHBn0EFqM4VWnK4PDsjQwJtP0O8wD5gDhYWdSF0.png"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Photo: Store photo",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "photo",
+                            "type": "file",
+                            "src": "/Users/rodrigocespedes/Documents/Sephora/photos/test.png"
+                        }
+                    ],
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{host}}/photo",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "photo"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: All with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/address/?page=0&include=postalcode,city,state,country",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "postalcode,city,state,country"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: All with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/address/?page=2",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "2"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: Search by name with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/address/?page=0&search=spen",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "search",
+                            "value": "spen"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: Search by name with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/address/?page=0&include=postalcode,city,state,country&search=rodr",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "postalcode,city,state,country"
+                        },
+                        {
+                            "key": "search",
+                            "value": "rodr"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: Show with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/address/729",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address",
+                        "729"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: Show with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/address/827/?include=postalcode,city,state,country",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address",
+                        "827",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "include",
+                            "value": "postalcode,city,state,country"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: Delete by id",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/address/827",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address",
+                        "827"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: Store an Address",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"street_address\": \"Mariano Fragueiro 11\",\n    \"latitude\": -31.4128562,\n    \"longitude\": -64.19380749999999,\n    \"postal_code\": \"X5000\",\n    \"city\": \"Córdoba\",\n    \"state\": \"Córdoba\",\n    \"country\": \"Argentina\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{host}}/address",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Address: Store an Address Minimal",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"street_address\": \"Mariano Fragueiro 11\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{host}}/address",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "address"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Company: All with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/company/?page=0&include=contacts",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "company",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "contacts"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Company: All with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/company/?page=0",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "company",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Company: Search by name with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/company/?page=0&search=igue",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "company",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "search",
+                            "value": "igue"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Company: Search by name with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/company/?page=0&include=contacts&search=ro",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "company",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "contacts"
+                        },
+                        {
+                            "key": "search",
+                            "value": "ro"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Company: Show with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/company/11",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "company",
+                        "11"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Company: Show with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/company/11/?include=contacts",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "company",
+                        "11",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "include",
+                            "value": "contacts"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Location: All",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/location/?page=0",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "location",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Location: Search by name",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/location/?page=0&search=work",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "location",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "search",
+                            "value": "work"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Location: Show",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/location/1",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "location",
+                        "1"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "protocolProfileBehavior": {}
+}

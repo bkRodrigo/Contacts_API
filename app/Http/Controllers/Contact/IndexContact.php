@@ -18,6 +18,8 @@ class IndexContact extends ResourceAbstractClass
         $this->model = $contact;
         $this->eagerLoadOptions = [
             'company' => 'company',
+            'phones' => 'phones',
+            'photo' => 'photo',
             'address' => [
                 'address.country',
                 'address.state',

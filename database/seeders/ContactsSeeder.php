@@ -57,16 +57,21 @@ class ContactsSeeder extends Seeder
             $totalContacts += $count;
             $contacts = Contact::factory()->count($count)->make();
             foreach ($contacts as $contact) {
+                $phones = Phone::all()->random(rand(1, 10));
                 $newContact = new Contact();
                 $newContact->first_name = $contact->first_name;
                 $newContact->last_name = $contact->last_name;
-                $newContact->avatar = $contact->avatar;
                 $newContact->email = $contact->email;
                 $newContact->birthday = $contact->birthday;
                 $newContact->company()->associate($company);
                 $newContact->address()->associate($contact->address);
+                $newContact->photo()->associate($contact->photo);
 
                 $newContact->save();
+
+                foreach ($phones as $phone) {
+                    $newContact->phones()->attach($phone);
+                }
             }
         }
         $doneMsg = 'Contact seeding completed, a total of ' . $totalContacts;

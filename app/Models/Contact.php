@@ -17,11 +17,11 @@ class Contact extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'avatar',
         'email',
         'birthday',
         'company_id',
         'address_id',
+        'photo_id',
     ];
 
     /**
@@ -30,6 +30,14 @@ class Contact extends Model
     public function phones()
     {
         return $this->belongsToMany(Phone::class);
+    }
+
+    /**
+     * Get the photo that's associated with the contact.
+     */
+    public function photo()
+    {
+        return $this->belongsTo(Photo::class);
     }
 
     /**

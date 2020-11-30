@@ -15,6 +15,10 @@ application.
  * [x] Create required endpoints [Completed on Day 3](devlog.md#day-3)
  * [x] Create tests for the endpoints [Completed on Day 3](devlog.md#day-3)
  * [x] Create front end client UI (done-ish) [Completed on Day 3](devlog.md#day-3)
+ * [x] Refine the front end so that it's more beautiful [Completed on Day 4](devlog.md#day-4)
+ * [x] Update documentation all over the project [Completed on Day 4](devlog.md#day-4)
+ * [x] Deploy the project so the folks at Kin + Carta can play with a demo version
+        of the project [Completed on Day 4](devlog.md#day-4)
 
 ## Day 1
 This day is about getting to grips with the problem and determining the best
@@ -425,3 +429,35 @@ project, we won't have a day 5, so everything needs to be completed today
  - [ ] Update documentation all over the project
  - [ ] Deploy the project so the folks at Kin + Carta can play with a demo version
        of the project
+
+## The frontend
+This has been a fun but labor intensive job; I'm a perfectionist and I at least
+want to create a demo that's pleasant to play with... I think I've achieved that.
+I will be honest, my front end code is not super clean, it's missing refactors and
+is missing tests... I'm not to worried about these misses as the central goal of
+this code challenge is to do the backend; the client was just something extra that
+I made as it is in Kin + Carta's intesrest for me to know vuejs. In the end, I
+didn't use Vue 3 for this project as it's just too new and I didn't want to risk
+issues with the build process; I would've liked to do the project taking advantage
+of the composition API, but I'll have to leave that for next time.
+
+## Documentation
+Documentation is a beat that is never completely tamed. There's always more
+documentation that can be written. I hope I did enough to satisfy Kin + Carta
+here!
+
+## Deploy the project
+The project got deployed in a private droplet in digitalocean, the backend is
+running behind private IPs (just like the recommended practice for this micro-service).
+The front end is also running in a droplet. We're good, we're done!!
+
+Pending: Let's see what the folks at Kin + Carta think :)
+
+### Tasks completed today
+The goal on day 3 was to finish the challenge. Even though I did finish the
+requirement, I'm going to add one more day to this challenge in order to get that
+UI looking a bit better and also to get the documentation more complete.
+ - [x] Refine the front end so that it's more beautiful
+ - [x] Update documentation all over the project
+ - [x] Deploy the project so the folks at Kin + Carta can play with a demo version
+        of the project

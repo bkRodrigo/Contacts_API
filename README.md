@@ -20,6 +20,18 @@ is that it runs in a private network as a microservice and would never be public
 available. Other services would interact with the microservice and implement their
 own token and handshake strategies.
 
+## Regarding the requirements
+Search contact by email
+`{{host}}/contact/?search=email@gmail.com[email]`
+Search contact by phone number
+`{{host}}/contact/?search=555-5555[phones]`
+Search contact by city
+`{{host}}/contact/?search=Cordoba[city]`
+Search contact by state
+`{{host}}/contact/?search=Cordoba[state]`
+
+There is more informationon the [api docs](./documentation/api.md), this API does a
+lot more!
 
 I hope you enjoy this project!
 

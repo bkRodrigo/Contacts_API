@@ -3,19 +3,31 @@
 namespace App\Http\Controllers\Contact;
 
 use App\Http\Controllers\ResourceAbstractClass;
+use App\Models\Address;
+use App\Models\City;
 use App\Models\Contact;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class IndexContact extends ResourceAbstractClass
 {
     /**
+     * The Address model.
+     *
+     * @var Address
+     */
+    protected $address;
+
+    /**
      * Create a new single action controller instance.
      *
      * @param Contact $contact
+     * @param Address $address
      */
-    public function __construct(Contact $contact) {
+    public function __construct(Contact $contact, Address $address) {
         $this->model = $contact;
+        $this->address = $address;
         $this->eagerLoadOptions = [
             'company' => 'company',
             'phones' => 'phones.location',
@@ -59,9 +71,19 @@ class IndexContact extends ResourceAbstractClass
         $searchStr = $paramsConf['search'];
         $params = $paramsConf['params'];
         // Create the query and return the results
+        $idsFromRelationships = [];
+        if (count($params['special']) > 0) {
+            $idsFromRelationships = $this->getByJoinedResults(
+                $params['special'], $searchStr,
+            );
+        }
         $query = $this->model->with($eagers);
         $whereConstraintUsed = false;
-        foreach ($params as $param) {
+        if (count($idsFromRelationships) > 0) {
+            $query->whereIn('id', $idsFromRelationships);
+            $whereConstraintUsed = true;
+        }
+        foreach ($params['normal'] as $param) {
             if ($whereConstraintUsed) {
                 $query->orWhere($param, 'LIKE', '%' . $searchStr . '%');
             } else {
@@ -71,6 +93,49 @@ class IndexContact extends ResourceAbstractClass
         }
 
         return $query->get();
+    }
+
+    /**
+     * This method takes an array of relationships that be composed by the following
+     * list of possible items: 'phones', 'city', 'state'. We will then get all of
+     * the contacts that have a relationship whose name contains $searchStr.
+     *
+     * @param array $params
+     * @param string $searchStr
+     *
+     * @return array
+     */
+    protected function getByJoinedResults(array $params, string $searchStr) : array
+    {
+        $queryString = 'SELECT c.id ';
+        $queryString .= 'FROM contacts AS c ';
+        $queryString .= 'JOIN addresses AS a ON a.id=c.address_id ';
+        $queryString .= 'JOIN cities AS ci ON ci.id=a.city_id ';
+        $queryString .= 'JOIN states AS s ON s.id=a.state_id ';
+        $queryString .= 'JOIN contact_phone AS cp ON cp.contact_id=c.id ';
+        $queryString .= 'JOIN phones AS p ON p.id=cp.phone_id ';
+        $queryString .= 'WHERE ';
+        $whereAdded = false;
+        if (in_array('state', $params)) {
+            $whereAdded = true;
+            $queryString .= 's.name LIKE \'%' . $searchStr . '%\' ';
+        }
+        if (in_array('city', $params)) {
+            $queryString .= $whereAdded ? 'OR ' : '';
+            $queryString .= 'ci.name LIKE \'%' . $searchStr . '%\' ';
+        }
+        if (in_array('phones', $params)) {
+            $queryString .= $whereAdded ? 'OR ' : '';
+            $queryString .= 'p.number LIKE \'%' . $searchStr . '%\' ';
+        }
+        $queryString = trim($queryString);
+        $queryResults = DB::select($queryString);
+        $contactIds = [];
+        foreach ($queryResults as $queryResult) {
+            $contactIds[] = $queryResult->id;
+        }
+
+        return $contactIds;
     }
 
     /**
@@ -90,29 +155,43 @@ class IndexContact extends ResourceAbstractClass
      *
      * @return array
      */
-    private function resolveSearchParams($search) : array
+    private function resolveSearchParams(string $search) : array
     {
-        $validParams = ['first_name', 'last_name', 'email'];
+        $validParams = [
+            'normal' => ['first_name', 'last_name', 'email'],
+            'special' => ['state', 'city', 'phones'],
+        ];
         $paramsStart = strpos($search, '[');
         $paramsEnd = strpos($search, ']');
         $searchStr = $search;
-        $params = [];
+        $params = [
+            'normal' => [],
+            'special' => [],
+        ];
         if ($paramsStart !== false && $paramsEnd !== false && $paramsStart < $paramsEnd) {
             $searchStr = substr($search, 0, $paramsStart);
             $paramsStart++;
             $params = array_reduce(
                 explode(',', substr($search, $paramsStart, $paramsEnd - $paramsStart)),
                 function ($resolvedParams, $proposedParam) use ($validParams) {
-                    if (in_array($proposedParam, $validParams)) {
-                        $resolvedParams[] = $proposedParam;
+                    if (in_array($proposedParam, $validParams['normal'])) {
+                        $resolvedParams['normal'][] = $proposedParam;
+                    }
+                    if (in_array($proposedParam, $validParams['special'])) {
+                        $resolvedParams['special'][] = $proposedParam;
                     }
 
                     return $resolvedParams;
                 },
-                []
+                [
+                    'normal' => [],
+                    'special' => [],
+                ]
             );
         }
-        $params = count($params) === 0 ? $validParams : $params;
+        if (count($params['normal']) === 0 && count($params['special']) === 0) {
+            $params = $validParams;
+        }
 
         return [
             'search' => $searchStr,

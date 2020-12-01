@@ -77,7 +77,7 @@ abstract class ResourceAbstractClass extends Controller
                 );
         } else {
             // A search was performed, get the right page from the result
-            $items->forPage(
+            $items = $items->forPage(
                 $paginationMetadata['current_page'],
                 $paginationMetadata['per_page'],
             );

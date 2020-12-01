@@ -17,7 +17,7 @@ class ShowContact extends ResourceAbstractClass
         $this->model = $contact;
         $this->eagerLoadOptions = [
             'company' => 'company',
-            'phones' => 'phones',
+            'phones' => 'phones.location',
             'photo' => 'photo',
             'address' => [
                 'address.country',

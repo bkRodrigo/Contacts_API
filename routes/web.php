@@ -60,6 +60,10 @@ $router->get('/location/{id}', [
     'uses' => 'Location\ShowLocation',
 ]);
 
+$router->get('/phone', [
+    'uses' => 'Phone\IndexPhone',
+]);
+
 $router->post('/photo', [
     'uses' => 'Photo\StorePhoto',
 ]);

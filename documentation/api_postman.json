@@ -105,7 +105,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "{{host}}/contact/?page=0&include=company,address,phones,photo&search=ro[last_name]",
+                    "raw": "{{host}}/contact/?page=2&include=company,address,phones,photo&search=ro[last_name]",
                     "host": [
                         "{{host}}"
                     ],
@@ -116,7 +116,7 @@
                     "query": [
                         {
                             "key": "page",
-                            "value": "0"
+                            "value": "2"
                         },
                         {
                             "key": "include",
@@ -155,13 +155,13 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "{{host}}/contact/1?include=company,address,phones,photo",
+                    "raw": "{{host}}/contact/825?include=company,address,phones,photo",
                     "host": [
                         "{{host}}"
                     ],
                     "path": [
                         "contact",
-                        "1"
+                        "825"
                     ],
                     "query": [
                         {
@@ -180,7 +180,7 @@
                 "header": [],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\n    \"first_name\": \"Rodrigo\",\n    \"last_name\": \"Cespedes Daza\",\n    \"email\": \"rodrigo@testmyfakeemail.com\",\n    \"birthday\": \"1986-11-22\",\n    \"company\": \"My Awesome Company\",\n    \"address_id\": \"1\",\n    \"phones\": [\n        {\n            \"number\": \"001 5555-5555\",\n            \"location\": \"home\",\n            \"description\": \"My description\"\n        }\n    ]\n}",
+                    "raw": "{\n    \"first_name\": \"Korali\",\n    \"last_name\": \"Lopez Talaverano\",\n    \"email\": \"kora@brewkrafts.com\",\n    \"birthday\": \"1991-05-06\",\n    \"company\": \"My Awesome Company\",\n    \"address_id\": \"1\",\n    \"phones\": [\n        {\n            \"number\": \"001 5555-5555\",\n            \"location\": \"home\",\n            \"description\": \"My description\"\n        }\n    ],\n    \"photo_id\": 5\n}",
                     "options": {
                         "raw": {
                             "language": "json"
@@ -245,6 +245,118 @@
             "response": []
         },
         {
+            "name": "Phone: All with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/phone/?page=0",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "phone",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Phone: All with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/phone/?page=0&include=contacts,location",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "phone",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "contacts,location"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Phone: Search by number with minimal data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/phone/?page=0&search=555-",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "phone",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "search",
+                            "value": "555-"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Phone: Search by number with all data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{host}}/phone/?page=0&include=contacts,location&search=555-",
+                    "host": [
+                        "{{host}}"
+                    ],
+                    "path": [
+                        "phone",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "include",
+                            "value": "contacts,location"
+                        },
+                        {
+                            "key": "search",
+                            "value": "555-"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
             "name": "Photo: Show photo",
             "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -291,7 +403,7 @@
                         {
                             "key": "photo",
                             "type": "file",
-                            "src": "/Users/rodrigocespedes/Documents/Sephora/photos/test.png"
+                            "src": "/Users/rodrigocespedes/Documents/Sephora/photos/selfie.png"
                         }
                     ],
                     "options": {

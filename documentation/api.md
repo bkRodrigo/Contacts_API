@@ -64,7 +64,7 @@ This is the only full resource in the application.
 Things to keep in mind
 * The update endpoint is a `PUT` request, so it's destructive, you need to send
  all of the data you want to save as it will mass overwrite.
-* Available search fields: `['first_name', 'last_name', 'email', 'city', 'state']`.
+* Available search fields: `['first_name', 'last_name', 'email', 'city', 'state', 'phones']`.
 * Eager loads: `company,address,phones,photo`.
 ```php
 $router->get('/contact', [

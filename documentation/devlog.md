@@ -17,7 +17,7 @@ application.
  * [x] Create front end client UI (done-ish) [Completed on Day 3](devlog.md#day-3)
  * [x] Refine the front end so that it's more beautiful [Completed on Day 4](devlog.md#day-4)
  * [x] Update documentation all over the project [Completed on Day 4](devlog.md#day-4)
- * [x] Deploy the project so the folks at Kin + Carta can play with a demo version
+ * [x] Deploy the project so that we can have a demo version
         of the project [Completed on Day 4](devlog.md#day-4)
 
 ## Day 1

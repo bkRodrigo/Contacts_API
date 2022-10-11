@@ -54,7 +54,7 @@ On a high level, I'd like to achieve the following;
    practices" should suffice for this project.
  * Since we're only creating an API, I'm going to use Laravel Lumen for this
   project; it's in line with the micro-service idea we're pursuing.
- * Upon consulting with Kin + Carta, I was advised that this service will not
+ * This service will not
   have millions of contacts, I can assume that there should someday be thousands
   of contacts. Contacts must be persisted. This allows me to conclude the
   following;

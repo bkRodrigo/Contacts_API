@@ -1,4 +1,4 @@
-# Kin + Carta Code Challenge
+# Code Challenge
 ## Contacts API
 
 Thank you for taking the time to look at this project! Please note that there
@@ -35,4 +35,4 @@ lot more!
 
 I hope you enjoy this project!
 
-also, take a look at the client in action (front end project) [here](kc.brewkrafts.com)!.
+also, take a look at the client in action (front end project) [here](contacts.brewkrafts.com)!.

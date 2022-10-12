@@ -441,7 +441,7 @@ process; I would've liked to do the project taking advantage of the composition
 API, but I'll have to leave that for next time.
 
 ## Documentation
-Documentation is a beat that is never completely tamed. There's always more
+Documentation is a beast that is never completely tamed. There's always more
 documentation that can be written.
 
 ## Deploy the project

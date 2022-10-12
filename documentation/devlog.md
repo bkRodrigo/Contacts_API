@@ -62,7 +62,7 @@ On a high level, I'd like to achieve the following;
     I'm going to use MySQL.
    * If I'm not going to have millions of contacts to search through, then DB
     indexing will be enough, we don't need to think about using some sort of
-    service for interacting with the database. In the interest of time, _and an
+    service for interacting with the database. In the interest of time _and an
     objective lack of need_, I won't implement a dedicated search service (such
     as Elastic Search); my searches will go directly to the database.
    * Searching brings with it some interesting challenges. Fuzzy searches come

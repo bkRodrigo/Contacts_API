@@ -451,7 +451,7 @@ The front end is also running in a droplet. We're good, we're done!!
 
 ### Tasks completed today
 The goal on day 3 was to finish the challenge. Even though I did finish the
-requirement, I'm going to add one more day to this challenge in order to get that
+requirement, I added one more day to this challenge in order to get that
 UI looking a bit better and also to get the documentation more complete.
  - [x] Refine the front end so that it's more beautiful
  - [x] Update documentation all over the project
